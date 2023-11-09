@@ -1,9 +1,8 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
+import 'package:flutter_glow/flutter_glow.dart';
 import 'package:gap/gap.dart';
 import 'package:status_alert/status_alert.dart';
-import 'package:neon/neon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -87,12 +86,17 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(25),
             child: Column(
               children: [
-                Neon(
-                  text: "Tic Tac Toe",
-                  color: ,
-
+                const Gap(15),
+                const GlowText(
+                  "Tic Tac Toe",
+                  glowColor: Colors.purpleAccent,
+                  style: TextStyle(
+                    color: Colors.purpleAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 45,
+                  ),
                 ),
-                const Gap(40),
+                const Gap(50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -113,10 +117,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                const Gap(
-                  50,
-                ),
-                Expanded(
+                SizedBox(
+                  height: 360,
+                  width: double.infinity,
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -141,29 +144,27 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           child: Center(
-                            child: Stack(children: [
-                              Text(
-                                gameGrid[row][colum],
-                                style: TextStyle(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.bold,
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 4
-                                      ..color = gameGrid[row][colum] == 'O'
+                            child: Text(
+                              gameGrid[row][colum],
+                              style: TextStyle(
+                                  fontSize: 90,
+                                  fontWeight: FontWeight.bold,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 4
+                                    ..color = gameGrid[row][colum] == 'O'
+                                        ? Colors.red
+                                        : Colors.green,
+                                  shadows: [
+                                    Shadow(
+                                      color: gameGrid[row][colum] == 'O'
                                           ? Colors.red
                                           : Colors.green,
-                                    shadows: [
-                                      Shadow(
-                                        color: gameGrid[row][colum] == 'O'
-                                            ? Colors.red
-                                            : Colors.green,
-                                        blurRadius: 40,
-                                        offset: const Offset(0, 0),
-                                      )
-                                    ]),
-                              ),
-                            ]),
+                                      blurRadius: 40,
+                                      offset: const Offset(0, 0),
+                                    )
+                                  ]),
+                            ),
                           ),
                         ),
                       );
@@ -171,24 +172,37 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const Gap(20),
-                MaterialButton(
-                  height: 50,
-                  minWidth: double.infinity,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  color: Colors.white,
-                  onPressed: () {
-                    startGame();
-                  },
-                  child: const Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text("Restart"),
-                      ),
-                    ],
-                  ),
-                )
+                GlowButton(
+                    width: double.infinity,
+                    glowColor: Colors.purpleAccent,
+                    blurRadius: 30,
+                    color: Colors.black,
+                    border: Border.all(
+                      color: Colors.purpleAccent,
+                    ),
+                    child: const Row(
+                      children: [
+                        Spacer(),
+                        GlowText(
+                          "Restart",
+                          glowColor: Colors.purpleAccent,
+                          style: TextStyle(
+                            color: Colors.purpleAccent,
+                            fontSize: 22,
+                          ),
+                        ),
+                        Spacer(),
+                        GlowIcon(
+                          Icons.refresh,
+                          color: Colors.purpleAccent,
+                          blurRadius: 30,
+                          glowColor: Colors.purpleAccent,
+                        )
+                      ],
+                    ),
+                    onPressed: () {
+                      startGame();
+                    }),
               ],
             ),
           ),
