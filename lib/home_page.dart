@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isVisible = true;
   List<List<String>> gameGrid = [];
   String currentPlayer = '';
 
@@ -49,9 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   startGame() {
     gameGrid = List.generate(3, (_) => List.filled(3, ''));
-    debugPrint(gameGrid.toString());
     currentPlayer = "O";
-    setState(() {});
   }
 
   @override
@@ -118,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 SizedBox(
-                  height: 360,
+                  height: 420,
                   width: double.infinity,
                   child: GridView.builder(
                     gridDelegate:
@@ -171,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                const Gap(20),
+                const Gap(50),
                 GlowButton(
                     width: double.infinity,
                     glowColor: Colors.purpleAccent,
